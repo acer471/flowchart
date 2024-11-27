@@ -1,15 +1,43 @@
-```mermaid
-flowchart TD
-    Start([Start]) --> SeedReceipt[Seed Receipt]
-    SeedReceipt --> InitialInspection{Initial Inspection}
-    InitialInspection -- "Rejected" --> End1([End])
-    InitialInspection -- "Approved" --> Cleaning[Cleaning & Drying]
-    Cleaning --> Viability{Seed Viability Testing}
-    Viability -- "Failed" --> End2([End])
-    Viability -- "Passed" --> Moisture{Moisture Content Analysis}
-    Moisture -- "High" --> End3([End])
-    Moisture -- "Low" --> Health{Seed Health Testing}
-    Health -- "Failed" --> End4([End])
-    Health -- "Passed" --> Accession[Accessioning & Cataloguing]
-    Accession --> Storage[Storage in Genebank]
-    Storage --> End5([End])
+# Comprehensive Seed Evaluation Flowchart in Seed Genebank
+
+```plaintext
+Start
+  |
+  V
+Seed Receipt
+  |
+  V
+Initial Inspection
+  |                               \
+  V                                \
+Accepted                  Rejected (if not meeting criteria) --> End
+  |
+  V
+Seed Cleaning & Drying
+  |
+  V
+Seed Viability Testing
+  |                               \
+  V                                \
+Passed                  Failed (if viability is low)
+  |                               \
+  V                                \
+Moisture Content Testing        Second Viability Testing
+  |                               |
+  V                               V
+Passed                  Failed (if viability is low) --> End
+  |                               |
+  V                               |
+Seed Health Testing (e.g., for pathogens)
+  |                               |
+  V                               |
+Passed                  Failed (health criteria not met)
+  |                               |
+  V                               V
+Accessioning & Cataloguing    Second Health Testing
+  |                               |
+  V                               V
+Storage in Genebank            Failed --> Documentation,
+  |                                              Notification,
+  V                                              & Disposal/Return
+End

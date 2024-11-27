@@ -1,6 +1,6 @@
 # Comprehensive Seed Evaluation Flowchart in Seed Genebank
 
-```plaintext
+```mermaid
 Start
   |
   V

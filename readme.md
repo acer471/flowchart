@@ -1,24 +1,36 @@
-# Comprehensive Seed Evaluation Flowchart in Seed Genebank
+import networkx as nx
+import matplotlib.pyplot as plt
 
-```mermaid
-flowchart TD
-    A([Start]) --> B([Seed Receipt])
-    B --> C([Initial Inspection])
-    C -->|Accepted| D([Seed Cleaning & Drying])
-    C -->|Rejected| Z([End])
-    D --> E([Seed Viability Testing])
-    E -->|Passed| F([Moisture Content Testing])
-    E -->|Failed| E1([Second Viability Testing])
-    E1 -->|Passed| F
-    E1 -->|Failed| Z
-    F -->|Passed| G([Seed Health Testing])
-    F -->|Failed| F1([Re-Drying])
-    F1 --> F2([Re-Testing])
-    F2 -->|Passed| G
-    F2 -->|Failed| Z
-    G -->|Passed| H([Accessioning & Cataloguing])
-    G -->|Failed| G1([Second Health Testing])
-    G1 -->|Passed| H
-    G1 -->|Failed| I([Documentation, Notification, & Disposal/Return])
-    H --> J([Storage in Genebank])
-    J --> Z([End])
+# Define the nodes and edges, incorporating the annotations
+nodes = [
+    '0 (All characters 0)', 
+    '(Change: Character 1, 0 -> 1)', 
+    'Node 1', 
+    'Node 2', 
+    'Node 3', 
+    'A (6)',  # Include the numbers with the leaf nodes
+    'B (2, 5, 10)', 
+    'C (3, 4, 7, 9, 8)', 
+    'D (8)'
+]
+edges = [
+    ('0 (All characters 0)', '(Change: Character 1, 0 -> 1)'), 
+    ('(Change: Character 1, 0 -> 1)', 'Node 1'), 
+    ('Node 1', 'Node 2'), 
+    ('Node 1', 'Node 3'), 
+    ('Node 2', 'A (6)'), 
+    ('Node 2', 'B (2, 5, 10)'), 
+    ('Node 3', 'C (3, 4, 7, 9, 8)'), 
+    ('Node 3', 'D (8)')
+]
+
+# Create the tree using NetworkX
+tree = nx.Graph()
+tree.add_nodes_from(nodes)
+tree.add_edges_from(edges)
+
+# Visualize the tree
+pos = nx.spring_layout(tree)  # You can experiment with different layouts
+nx.draw(tree, pos, with_labels=True, node_size=2000, node_color="skyblue", font_size=8) 
+plt.title("Annotated Tree Visualization")
+plt.show()
